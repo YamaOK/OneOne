@@ -1,0 +1,22 @@
+#welcome{
+    text-align: center;
+}
+
+.welcomeStart{
+    background-color: inherit;
+    width: 300px;
+    color: #ff9e3e;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0.2em;
+    padding: 5px;
+    border: solid 2px #ff9e3e;
+    font-weight: bold;
+}
+
+.welcomeStart:hover{
+    background-color: #ff9e3e;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}

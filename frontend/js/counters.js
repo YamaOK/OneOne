@@ -1,7 +1,8 @@
 const kindOfGame = new Vue({
   el: '#kindOfGame',
   data: {
-    editFlg: false,
+    isShow: false,
+    isEditing: false,
     games: [
       { name: '荒野行動', selected: false },
       { name: 'PUBG', selected: false },
@@ -16,16 +17,21 @@ const kindOfGame = new Vue({
         this.games[i].selected = i === index
       }
       counterBox.refleshChart()
+      this.isShow = false
     },
     classSelected: function (game) {
-      return game.selected ? 'selected' : '';
+      return game.selected ? 'selected' : ''
     },
     addGame: function () {
       this.games.push({ name: 'New Game', selected: false })
-      counterBox.counters.push({ editFlg: true, buttons: [{ name: '', count: 0 }, { name: '', count: 0 } ] })
+      counterBox.counters.push({ isEditing: true, buttons: [{ name: '', count: 0 }, { name: '', count: 0 }] })
     },
     editGame: function () {
-      this.editFlg = !this.editFlg
+      this.isEditing = !this.isEditing
+    },
+    trash: function (index) {
+      this.games.pop(index)
+      counterBox.counters.pop(index)
     }
   },
   mounted () {
@@ -37,12 +43,13 @@ const counterBox = new Vue({
   el: '#counterBox',
   data: {
     counters: [
-      { editFlg: false, buttons: [{ name: '勝ち', count: 100 }, { name: '負け', count: 100 }] },
-      { editFlg: false, buttons: [{ name: 'ドン勝つ', count: 0 }, { name: '負け', count: 0 }] },
-      { editFlg: false, buttons: [{ name: '一家', count: 0 }, { name: '二家', count: 0 }, { name: '三家', count: 0 }, { name: '四家', count: 0 }] },
-      { editFlg: false, buttons: [{ name: '勝ち', count: 0 }, { name: '負け', count: 0 }] }
+      { isEditing: false, buttons: [{ name: '勝ち', count: 100 }, { name: '負け', count: 100 }] },
+      { isEditing: false, buttons: [{ name: 'ドン勝つ', count: 0 }, { name: '負け', count: 0 }] },
+      { isEditing: false, buttons: [{ name: '一家', count: 0 }, { name: '二家', count: 0 }, { name: '三家', count: 0 }, { name: '四家', count: 0 }] },
+      { isEditing: false, buttons: [{ name: '勝ち', count: 0 }, { name: '負け', count: 0 }] }
     ],
-    selected: 0
+    selected: 0,
+    newButtonName: ''
   },
   methods: {
     countUp: function (indexCnt, indexBtn) {
@@ -50,11 +57,12 @@ const counterBox = new Vue({
       this.refleshChart()
     },
     addBtn: function (indexCnt) {
-      this.counters[indexCnt].buttons.push({ name: 'New Button', count: 0 })
+      this.counters[indexCnt].buttons.push({ name: this.newButtonName, count: 0 })
       this.refleshChart()
+      this.newButtonName = ''
     },
     editBtn: function (indexCnt) {
-      this.counters[indexCnt].editFlg = !this.counters[indexCnt].editFlg
+      this.counters[indexCnt].isEditing = !this.counters[indexCnt].isEditing
       this.refleshChart()
     },
     refleshChart: function () {
@@ -71,6 +79,12 @@ const counterBox = new Vue({
       chart.options.scales.yAxes[0].ticks.max = maxCnt
       chart.update()
       console.log(this.chart)
+    }
+  },
+  computed: {
+    gameTitle: function () {
+      const index = this.selected
+      return kindOfGame.games[index].name
     }
   },
   mounted () {
@@ -96,7 +110,5 @@ const counterBox = new Vue({
       }
     })
     this.refleshChart()
-  },
-  computed: {
   }
 })

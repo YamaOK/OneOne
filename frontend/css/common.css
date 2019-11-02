@@ -1,0 +1,78 @@
+body{
+    background-color: teal;
+    font-size: 2em;
+    margin: 0;
+}
+button{
+    background-color: cornflowerblue;
+    color: white;
+    border-style: none;
+    border-radius: 0.2em;
+    font-size: 1em;
+    width: 6em;
+}
+textarea{
+    background-color: inherit;
+    border:none;
+    font-size: 1em;
+    color: gray;
+    text-align: center;
+    vertical-align: middle;
+}
+#header{
+    width: 100%;
+    margin: 0;
+    background-color: white;
+    text-align: center;
+}
+.game{
+    display: inline-block;
+    margin: 0.1em 0.5em;
+    background-color: darkslateblue;
+    color: white;
+    padding: 0 0.5em;
+    border-radius: 0.2em;
+}
+.selected{
+    background-color: hotpink;
+}
+#counterBox{
+
+}
+
+.counterArea{
+    margin: 1em;
+    text-align: center;
+}
+
+.counter{
+    margin: 0.5em;
+    font-size: 1em;
+    height: 100%;
+    color: white;
+    border: 0px;
+    border-radius: 0.2em;
+}
+.counterBtn{
+    display: inline-block;
+    width: 50%;
+    background-color: indigo;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0.2em;
+}
+.counterResult{
+    display: inline-block;
+    width: 10%;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+}
+#divGraph{
+    margin: 0 auto;
+    background-color: white;
+    height: 100%;
+    width: 60%;
+}
+#chart{
+}    

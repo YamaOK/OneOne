@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/Chart.js"></script>
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+    <div id="header">
+        <div id="kindOfGame">
+            <template v-for="(game, index) in games">
+                <div class="game" @click="selectGame(index)" :class="classSelected(game)" v-show="!editFlg">
+                    {{game.name}}
+                </div>
+                <div class="game" @click="selectGame(index)" :class="classSelected(game)" v-show="editFlg">
+                    <textarea name="" cols="10" rows="1" v-model="game.name"></textarea>
+                </div>
+            </template>
+            <br>
+            <button @click="addGame">Add</button>
+            <button @click="editGame">
+                <span v-show="!editFlg">Edit</span>
+                <span v-show="editFlg">Complete</span>
+            </button>
+        </div>
+    </div>
+    <div id="content">
+        <div id="counterBox">
+            <template v-for="(counter, indexCnt) in counters">
+                <div v-show="selected===indexCnt" class="counterArea">
+                    <template v-for="(button, indexBtn) in counter.buttons">
+                        <div class="counter"  v-show="!counter.editFlg">
+                            <div class="counterBtn" @click="countUp(indexCnt,indexBtn)">
+                                {{button.name}}
+                            </div>
+                            <div class="counterResult">
+                                {{button.count}}
+                            </div>
+                        </div>
+                    </template>
+                    <template v-for="(button, indexBtn) in counter.buttons">
+                        <div class="counter"  v-show="counter.editFlg">
+                            <div class="counterBtn">
+                                <textarea name="buttonName" cols="20" rows="1" v-model="button.name"></textarea>
+                            </div>
+                            <div class="counterResult">
+                                {{button.count}}
+                            </div>
+                        </div>
+                    </template>
+                    <button @click="addBtn(indexCnt)">Add</button>
+                    <button @click="editBtn(indexCnt)">
+                        <span v-show="!counter.editFlg">Edit</span>
+                        <span v-show="counter.editFlg">Complete</span>
+                    </button>
+                </div>
+            </template>
+            <div id="divGraph">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/counters.js"></script>
+</html>

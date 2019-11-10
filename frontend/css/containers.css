@@ -105,6 +105,9 @@ textarea{
     width: 50%;
     color: white;
 }
+.fa-backspace{
+    cursor: pointer;   
+}
 .counterResult{
     display: inline-block;
     width: 10%;

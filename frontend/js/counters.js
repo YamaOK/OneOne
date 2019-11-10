@@ -65,6 +65,14 @@ const counterBox = new Vue({
       this.counters[indexCnt].isEditing = !this.counters[indexCnt].isEditing
       this.refleshChart()
     },
+    deleteBtn: function (indexCnt,indexBtn) {
+      const confirmResult = confirm('本当にカウンターを削除してよろしいですか？\n※削除した内容（カウント回数）は元に戻せません')
+      if(!confirmResult){
+        return 
+      }
+      this.counters[indexCnt].buttons.pop(indexBtn)
+      this.refleshChart()
+    },
     refleshChart: function () {
       chart.data.labels = []
       chart.data.datasets[0].data = []

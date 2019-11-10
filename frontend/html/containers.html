@@ -32,7 +32,8 @@
             <template v-for="(counter, indexCnt) in counters">
                 <div v-show="selected===indexCnt" class="counterArea">
                     <div id="gameTitle">
-                        "{{gameTitle}}"
+                        <span v-show="!counter.isEditing">"{{gameTitle}}"</span>
+                        <input type="text" class="gameTitleEdit" :size='getTitleAreaLength'  v-model="gameTitleEdit" v-show="counter.isEditing">
                         <button class="btnEdit" @click="editBtn(indexCnt)">
                             <span v-show="!counter.isEditing"><i class="fas fa-pen-nib fa-xs"></i></span>
                             <span v-show="counter.isEditing"><i class="fas fa-check fa-sm"></i></span>

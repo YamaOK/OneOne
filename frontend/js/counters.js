@@ -50,6 +50,7 @@ const counterBox = new Vue({
       { isEditing: false, buttons: [{ name: '勝ち', count: 0 }, { name: '負け', count: 0 }] }
     ],
     selected: 0,
+    gameTitleEdit: '',
     newButtonName: ''
   },
   methods: {
@@ -63,13 +64,18 @@ const counterBox = new Vue({
       this.newButtonName = ''
     },
     editBtn: function (indexCnt) {
+      if (this.counters[indexCnt].isEditing) {
+        kindOfGame.games[this.selected].name = this.gameTitleEdit
+      } else {
+        this.gameTitleEdit = kindOfGame.games[this.selected].name
+      }
       this.counters[indexCnt].isEditing = !this.counters[indexCnt].isEditing
       this.refleshChart()
     },
-    deleteBtn: function (indexCnt,indexBtn) {
-      const confirmResult = confirm('本当にカウンターを削除してよろしいですか？\n※削除した内容（カウント回数）は元に戻せません')
-      if(!confirmResult){
-        return 
+    deleteBtn: function (indexCnt, indexBtn) {
+      const confirmResult = window.confirm('本当にカウンターを削除してよろしいですか？\n※削除した内容（カウント回数）は元に戻せません')
+      if (!confirmResult) {
+        return
       }
       this.counters[indexCnt].buttons.pop(indexBtn)
       this.refleshChart()
@@ -94,6 +100,9 @@ const counterBox = new Vue({
     gameTitle: function () {
       const index = this.selected
       return kindOfGame.games[index].name
+    },
+    getTitleAreaLength: function () {
+      return this.gameTitleEdit.length + 2
     }
   },
   mounted () {

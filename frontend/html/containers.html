@@ -34,8 +34,8 @@
                     <div id="gameTitle">
                         "{{gameTitle}}"
                         <button class="btnEdit" @click="editBtn(indexCnt)">
-                            <span v-show="!counter.isEditing">✒</span>
-                            <span v-show="counter.isEditing">✔</span>
+                            <span v-show="!counter.isEditing"><i class="fas fa-pen-nib fa-xs"></i></span>
+                            <span v-show="counter.isEditing"><i class="fas fa-check fa-sm"></i></span>
                         </button>
                     </div>
                     <template v-for="(button, indexBtn) in counter.buttons">
@@ -51,11 +51,11 @@
                     <template v-for="(button, indexBtn) in counter.buttons">
                         <div class="counter"  v-show="counter.isEditing">
                             <div class="counterBtn">
-                                <input type="text" class="buttonName" name="buttonName" v-model="button.name"></textarea>
+                                <input type="text" class="buttonName" name="buttonName" v-model="button.name" />
                                 <span>x</span>
                             </div>
                             <div class="counterResult">
-                                {{button.count}}
+                                    <input type="number" class="counterEdit" name="counterEdit" v-model="button.count" />
                             </div>
                         </div>
                     </template>

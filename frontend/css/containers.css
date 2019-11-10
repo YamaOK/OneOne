@@ -99,6 +99,15 @@ textarea{
     vertical-align: middle;
     width: 90%;
 }
+.counterEdit{
+    background-color: inherit;
+    border:none;
+    font-size: 1em;
+    color: gray;
+    text-align: center;
+    vertical-align: middle;
+    width: 90%;
+}
 #newCounterBtn{
     background-color: dimgrey;
     font-size: 1em;

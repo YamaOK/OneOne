@@ -25,6 +25,7 @@ const kindOfGame = new Vue({
     addGame: function () {
       this.games.push({ name: 'New Game', selected: false })
       counterBox.counters.push({ isEditing: true, buttons: [{ name: '', count: 0 }, { name: '', count: 0 }] })
+      this.selectGame(this.games.length - 1)
     },
     editGame: function () {
       this.isEditing = !this.isEditing

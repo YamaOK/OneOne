@@ -3,12 +3,7 @@ const kindOfGame = new Vue({
   data: {
     isShow: false,
     isEditing: false,
-    games: [
-      { id:1, name: '荒野行動', selected: false },
-      { id:2, name: 'PUBG', selected: false },
-      { id:3, name: '麻雀', selected: false },
-      { id:4, name: 'ポーカー', selected: false }
-    ]
+    games: []
   },
   methods: {
     selectGame: function (index) {
@@ -67,12 +62,7 @@ let chart
 const counterBox = new Vue({
   el: '#counterBox',
   data: {
-    counters: [
-      { isEditing: false, buttons: [{ name: '勝ち', count: 100 }, { name: '負け', count: 100 }] },
-      { isEditing: false, buttons: [{ name: 'ドン勝つ', count: 0 }, { name: '負け', count: 0 }] },
-      { isEditing: false, buttons: [{ name: '一家', count: 0 }, { name: '二家', count: 0 }, { name: '三家', count: 0 }, { name: '四家', count: 0 }] },
-      { isEditing: false, buttons: [{ name: '勝ち', count: 0 }, { name: '負け', count: 0 }] }
-    ],
+    counters: [],
     selected: 0,
     gameTitleEdit: '',
     newButtonName: ''

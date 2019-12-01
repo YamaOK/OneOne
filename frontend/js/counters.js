@@ -52,6 +52,10 @@ const kindOfGame = new Vue({
           }
           return value.selected
         })
+        // When item deleted, no data to save
+        if(!selectedGame){
+          return
+        }
         saveStorage(selectedGame[0], counter)
       },
       deep:true
@@ -141,5 +145,13 @@ const counterBox = new Vue({
       }
     })
     this.refleshChart()
+  },
+  watch:{
+    counters:{
+      handler:function(val,oldVal){
+        saveStorage(kindOfGame.games[this.selected], val[this.selected])
+      },
+    deep:true
+  },
   }
 })

@@ -57,6 +57,11 @@ const kindOfGame = new Vue({
           }
           return value.selected
         })
+        // when item deleted.
+        // No data is needed saving
+        if(!selectedGame){
+          return
+        }
         saveStorage(selectedGame[0], counter)
       },
       deep:true

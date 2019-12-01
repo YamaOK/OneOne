@@ -28,9 +28,11 @@ const kindOfGame = new Vue({
       })
       return maxId
     },
+    generateNewId: function(){
+      return this.getMaxId() + 1
+    },
     addGame: function () {
-      let maxId = this.getMaxId()
-      this.games.push({ id: maxId + 1, name: 'New Game', selected: false })
+      this.games.push({ id: this.generateNewId(), name: 'New Game', selected: false })
       counterBox.counters.push({ isEditing: true, buttons: [{ name: '', count: 0 }, { name: '', count: 0 }] })
       this.selectGame(this.games.length - 1)
     },

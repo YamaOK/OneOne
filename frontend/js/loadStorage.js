@@ -1,4 +1,4 @@
-const loadStrage = () => {
+const loadStorage = () => {
   let games = []
   let counters = []
 

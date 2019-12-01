@@ -2,7 +2,7 @@ const loadStorage = () => {
   let games = []
   let counters = []
 
-  for (var i = 0; i <= localStorage.length; i++) {
+  for (var i = 0; i < localStorage.length; i++) {
     const containerStr = localStorage.getItem(localStorage.key(i))
     const container = JSON.parse(containerStr)
 

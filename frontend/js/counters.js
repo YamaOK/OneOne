@@ -4,10 +4,10 @@ const kindOfGame = new Vue({
     isShow: false,
     isEditing: false,
     games: [
-      { name: '荒野行動', selected: false },
-      { name: 'PUBG', selected: false },
-      { name: '麻雀', selected: false },
-      { name: 'ポーカー', selected: false }
+      { id:1, name: '荒野行動', selected: false },
+      { id:2, name: 'PUBG', selected: false },
+      { id:3, name: '麻雀', selected: false },
+      { id:4, name: 'ポーカー', selected: false }
     ]
   },
   methods: {
@@ -22,8 +22,17 @@ const kindOfGame = new Vue({
     classSelected: function (game) {
       return game.selected ? 'selected' : ''
     },
+    getMaxId:function () {
+      const maxId = this.games.reduce((pre,cur)=>{
+        return pre.id > cur.id ? pre.id : cur.id
+      })
+      return maxId
+    },
+    generateNewId: function(){
+      return this.getMaxId() + 1
+    },
     addGame: function () {
-      this.games.push({ name: 'New Game', selected: false })
+      this.games.push({ id: this.generateNewId(), name: 'New Game', selected: false })
       counterBox.counters.push({ isEditing: true, buttons: [{ name: '', count: 0 }, { name: '', count: 0 }] })
       this.selectGame(this.games.length - 1)
     },
@@ -37,6 +46,21 @@ const kindOfGame = new Vue({
   },
   mounted () {
     this.games[0].selected = true
+  },
+  watch: {
+    games: {
+      handler: function (val, oldVal) {
+        let counter
+        const selectedGame = val.filter((value,index)=>{
+          if(value.selected){
+            counter = counterBox.counters[index]
+          }
+          return value.selected
+        })
+        saveStorage(selectedGame[0], counter)
+      },
+      deep:true
+    }
   }
 })
 let chart
@@ -93,7 +117,6 @@ const counterBox = new Vue({
       }
       chart.options.scales.yAxes[0].ticks.max = maxCnt
       chart.update()
-      console.log(this.chart)
     }
   },
   computed: {

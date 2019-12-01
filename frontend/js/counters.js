@@ -57,8 +57,7 @@ const kindOfGame = new Vue({
           }
           return value.selected
         })
-        // when item deleted.
-        // No data is needed saving
+        // When item deleted, no data to save
         if(!selectedGame){
           return
         }
@@ -160,7 +159,6 @@ const counterBox = new Vue({
   watch:{
     counters:{
       handler:function(val,oldVal){
-        console.log(kindOfGame.games[this.selected])
         saveStorage(kindOfGame.games[this.selected], val[this.selected])
       },
     deep:true

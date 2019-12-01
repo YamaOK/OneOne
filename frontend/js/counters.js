@@ -151,5 +151,14 @@ const counterBox = new Vue({
       }
     })
     this.refleshChart()
+  },
+  watch:{
+    counters:{
+      handler:function(val,oldVal){
+        console.log(kindOfGame.games[this.selected])
+        saveStorage(kindOfGame.games[this.selected], val[this.selected])
+      },
+    deep:true
+  },
   }
 })

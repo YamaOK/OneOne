@@ -100,12 +100,12 @@ const kindOfGame = new Vue({
     },
     getMaxId: function () {
       const maxId = this.games.reduce((pre, cur) => {
-        return pre.id > cur.id ? pre.id : cur.id
+        return pre.id > cur.id ? pre : cur
       })
-      return maxId
+      return maxId.id
     },
     generateNewId: function () {
-      return this.getMaxId() + 1
+      return parseInt(this.getMaxId()) + 1
     },
     addGame: function () {
       this.games.push({ id: this.generateNewId(), name: 'New Game', selected: false, counter: { isEditing: true, buttons: [{ name: '', count: 0 }, { name: '', count: 0 }] } })

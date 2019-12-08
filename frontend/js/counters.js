@@ -163,12 +163,11 @@ const kindOfGame = new Vue({
   watch: {
     games: {
       handler: function (val, oldVal) {
-        const selectedGame = val.reduce((pre, cur) => {
-          return pre.selected ? pre : cur
-        })
-        if (selectedGame) {
-          this.refleshChart(selectedGame.counter)
-          saveStorage(selectedGame)
+        for(let i = 0; i < val.length; i ++){
+          saveStorage(val[i])
+          if(val[i].selected){
+            this.refleshChart(val[i].counter)
+          }
         }
       },
       deep: true

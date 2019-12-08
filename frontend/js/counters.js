@@ -17,13 +17,13 @@ const kindOfGame = new Vue({
     classSelected: function (game) {
       return game.selected ? 'selected' : ''
     },
-    getMaxId:function () {
-      const maxId = this.games.reduce((pre,cur)=>{
+    getMaxId: function () {
+      const maxId = this.games.reduce((pre, cur) => {
         return pre.id > cur.id ? pre.id : cur.id
       })
       return maxId
     },
-    generateNewId: function(){
+    generateNewId: function () {
       return this.getMaxId() + 1
     },
     addGame: function () {
@@ -39,26 +39,26 @@ const kindOfGame = new Vue({
       counterBox.counters.pop(index)
     }
   },
-  mounted () {
+  mounted() {
     this.games[0].selected = true
   },
   watch: {
     games: {
       handler: function (val, oldVal) {
         let counter
-        const selectedGame = val.filter((value,index)=>{
-          if(value.selected){
+        const selectedGame = val.filter((value, index) => {
+          if (value.selected) {
             counter = counterBox.counters[index]
           }
           return value.selected
         })
         // When item deleted, no data to save
-        if(!selectedGame){
+        if (!selectedGame) {
           return
         }
         saveStorage(selectedGame[0], counter)
       },
-      deep:true
+      deep: true
     }
   }
 })
@@ -122,7 +122,7 @@ const counterBox = new Vue({
       return this.gameTitleEdit.length + 2
     }
   },
-  mounted () {
+  mounted() {
     const ctx = document.getElementById('chart')
     chart = new Chart(ctx, {
       type: 'bar',
@@ -146,12 +146,12 @@ const counterBox = new Vue({
     })
     this.refleshChart()
   },
-  watch:{
-    counters:{
-      handler:function(val,oldVal){
+  watch: {
+    counters: {
+      handler: function (val, oldVal) {
         saveStorage(kindOfGame.games[this.selected], val[this.selected])
       },
-    deep:true
-  },
+      deep: true
+    },
   }
 })

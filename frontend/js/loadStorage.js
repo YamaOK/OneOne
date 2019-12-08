@@ -1,5 +1,5 @@
 const loadStorage = () => {
-  let games = []
+  const games = []
   for (var i = 0; i < localStorage.length; i++) {
     const containerStr = localStorage.getItem(localStorage.key(i))
     const container = JSON.parse(containerStr)
@@ -7,9 +7,9 @@ const loadStorage = () => {
       id: container.id,
       name: container.name,
       selected: container.selected,
-      counter:container.counter
+      counter: container.counter
     })
   }
-  console.log("loading")
+  console.log('loading')
   return games
 }

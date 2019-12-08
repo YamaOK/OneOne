@@ -98,6 +98,11 @@ textarea{
     vertical-align: middle;
     border-radius: 0.2em;
 }
+@media screen and (max-width:750px) {
+    .counterBtn{
+        width: 80%;
+    }
+}
 .buttonName{
     background-color: inherit;
     border:none;
@@ -105,7 +110,12 @@ textarea{
     color: gray;
     text-align: center;
     vertical-align: middle;
-    width: 90%;
+    width: 80%;
+}
+@media screen and (max-width:750px) {
+    .buttonName{
+        width: 75%;
+    }
 }
 .counterEdit{
     background-color: inherit;
@@ -116,11 +126,21 @@ textarea{
     vertical-align: middle;
     width: 90%;
 }
+@media screen and (max-width:750px) {
+    .buttonEdit{
+        width: 100%;
+    }
+}
 #newCounterBtn{
     background-color: dimgrey;
     font-size: 1em;
     width: 50%;
     color: white;
+}
+@media screen and (max-width:750px) {
+    #newCounterBtn{
+        width: 80%;
+    }
 }
 .fa-backspace{
     cursor: pointer;   

@@ -52,7 +52,7 @@ Vue.component('counter-box', {
             <template v-for="(button, indexBtn) in game.counter.buttons">
                 <div class="counter"  v-show="!isEditing">
                     <div class="counterBtn" @click="countUp(indexBtn)">
-                        {{button.name}}
+                        <span class="buttonName buttonNameSpan">{{button.name}}</span>
                     </div>
                     <div class="counterResult">
                         {{button.count}}
@@ -62,7 +62,7 @@ Vue.component('counter-box', {
             <template v-for="(button, indexBtn) in game.counter.buttons">
                 <div class="counter"  v-show="isEditing">
                     <div class="counterBtn">
-                        <input type="text" class="buttonName" name="buttonName" v-model="button.name" />
+                        <input type="text" class="buttonName buttonNameInput" name="buttonName" v-model="button.name" />
                         <span @click="deleteBtn(indexBtn)"><i class="fas fa-backspace"></i></span>
                     </div>
                     <div class="counterResult">

@@ -1,3 +1,6 @@
+/**
+ * LocalStorageのコンテナ情報を読み取る
+ */
 const loadStorage = () => {
   const games = []
   for (var i = 0; i < localStorage.length; i++) {

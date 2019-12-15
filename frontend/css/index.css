@@ -1,6 +1,9 @@
 #welcome{
     text-align: center;
 }
+#imgHeader{
+    width: 100%;
+}
 
 .welcomeStart{
     background-color: inherit;

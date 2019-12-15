@@ -1,0 +1,44 @@
+#hamburger{
+    position: absolute;
+    right: 1em;
+    top: 0.3em;
+}
+#hamburger:hover{
+    cursor: pointer;
+}
+#sideBar{
+    position: absolute;
+    top: 2em;
+    right: 0;
+    width: 40%;
+}
+@media screen and (max-width:750px) {
+    #sideBar{
+        width: 100%;
+    }
+}
+.game{
+    width: 100%;
+    background-color: #605c64;
+    color: white;
+    padding: 0 0.5em;
+}
+.selected{
+    background-color: #2f005e;
+    color: white;
+}
+.spnGameName{
+    display: inline-block;
+    width: 70%;
+}
+#gameTitle{
+    text-align: center;
+    font-weight: bold;
+}
+.btnTrash{
+    color: #9b0000;
+    width: 20%;
+    height: 1.5em;
+    border-radius: 2em;
+    background-color: inherit;
+}

@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="../js/saveStorage.js"></script>
+    <script src="../js/loadStorage.js"></script>
+    <script src="../js/removeGame.js"></script>
     <script src="../js/vue.js"></script>
     <script src="../js/Chart.js"></script>
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/containers.css">
+    <link rel="stylesheet" href="../css/humberger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
 </head>
 <body>
     <div id="header">
-        <img src='../img/onexone_timesnewroman_min.png' alt='onexone'>
+        <img src='../img/onexone_timesnewroman_min.png' alt='onexone' height="100%">
         <div id="hamburger" onclick="showHamburger()">🍔</div>
     </div>
-    <div id="sideBar">
-        <div id="kindOfGame" v-show="isShow">
+    <div id="kindOfGame">
+        <div id="sideBar" v-show="isShow">
             <template v-for="(game, index) in games">
                 <div class="game" @click="selectGame(index)" :class="classSelected(game)">
                     <span class="spnGameName">{{game.name}}</span>
@@ -26,50 +30,13 @@
             </template>
             <button @click="addGame">+</button> 
         </div>
-    </div>
-    <div id="content">
-        <div id="counterBox">
-            <template v-for="(counter, indexCnt) in counters">
-                <div v-show="selected===indexCnt" class="counterArea">
-                    <div id="gameTitle">
-                        "{{gameTitle}}"
-                        <button class="btnEdit" @click="editBtn(indexCnt)">
-                            <span v-show="!counter.isEditing">✒</span>
-                            <span v-show="counter.isEditing">✔</span>
-                        </button>
-                    </div>
-                    <template v-for="(button, indexBtn) in counter.buttons">
-                        <div class="counter"  v-show="!counter.isEditing">
-                            <div class="counterBtn" @click="countUp(indexCnt,indexBtn)">
-                                {{button.name}}
-                            </div>
-                            <div class="counterResult">
-                                {{button.count}}
-                            </div>
-                        </div>
-                    </template>
-                    <template v-for="(button, indexBtn) in counter.buttons">
-                        <div class="counter"  v-show="counter.isEditing">
-                            <div class="counterBtn">
-                                <input type="text" class="buttonName" name="buttonName" v-model="button.name"></textarea>
-                                <span>x</span>
-                            </div>
-                            <div class="counterResult">
-                                {{button.count}}
-                            </div>
-                        </div>
-                    </template>
-                    <div class="counter" v-show="counter.isEditing">
-                        <input type="text" name="newCounterBtn" id="newCounterBtn" placeholder="new button name" v-model="newButtonName" @keydown.enter="addBtn(indexCnt)"/>
-                        <div class="counterResult">
-                        </div>
-                    </div>
-                    <!-- <button @click="addBtn(indexCnt)">Add</button> -->
-                </div>
+        <div id="content">
+            <template v-for="(game, index) in games">
+                <counter-Box v-show="game.selected" :game="game" :isEditing="isEditing"></counter-Box>
             </template>
-            <div id="divGraph">
-                <canvas id="chart"></canvas>
-            </div>
+        </div>
+        <div id="divGraph">
+            <canvas id="chart"></canvas>
         </div>
     </div>
 </body>

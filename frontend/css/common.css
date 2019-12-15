@@ -3,3 +3,18 @@ body{
     font-size: 2em;
     margin: 0;
 }
+
+@media screen and (max-width:480px) {
+body{
+    font-size: 1.5em;
+}
+}
+
+button{
+    background-color: cornflowerblue;
+    color: white;
+    border-style: none;
+    border-radius: 0.2em;
+    font-size: 1em;
+    width: 60%;
+}

@@ -116,7 +116,11 @@ const kindOfGame = new Vue({
       this.isEditing = !this.isEditing
     },
     trash: function (index) {
-      this.games.pop(index)
+      removeGame(this.games[index].id)
+      this.games.splice(index, 1)
+      if (this.games.length === 0) {
+        this.games.push(templateGame)
+      }
     },
     refleshChart: function (counter) {
       chart.data.labels = []

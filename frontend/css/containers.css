@@ -65,13 +65,21 @@ textarea{
     }
 }
 .buttonName{
-    background-color: inherit;
-    border:none;
     font-size: 1em;
-    color: gray;
     text-align: center;
     vertical-align: middle;
     width: 80%;
+}
+.buttonNameSpan::after{
+    font-family: "Font Awesome 5 Free";
+    content: "\f55a";
+    color: rgba(0, 0, 0, 0);
+}
+.buttonNameInput{
+    background-color: inherit;
+    color: gray;
+    border:none;
+    font-weight: bold;
 }
 @media screen and (max-width:750px) {
     .buttonName{

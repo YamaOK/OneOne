@@ -10,13 +10,23 @@ Vue.component('counter-box', {
     }
   },
   methods: {
+    /**
+     * カウンタを1増やす
+     * @param {number} indexBtn どのボタンかを示す番号
+     */
     countUp: function (indexBtn) {
       this.game.counter.buttons[indexBtn].count++
     },
+    /**
+     * 比較項目（ボタン）を増やす
+     */
     addBtn: function () {
       this.game.counter.buttons.push({ name: this.newButtonName, count: 0 })
       this.newButtonName = ''
     },
+    /**
+     * 編集モードに移動、すでに編集モードなら編集を確定
+     */
     editBtn: function () {
       if (this.isEditing) {
         this.game.name = this.gameTitleEdit
@@ -25,6 +35,10 @@ Vue.component('counter-box', {
       }
       this.isEditing = !this.isEditing
     },
+    /**
+     * カウンターボタンを削除する
+     * @param {number} indexBtn 削除するボタンの番号
+     */
     deleteBtn: function (indexBtn) {
       const confirmResult = window.confirm('本当にカウンターを削除してよろしいですか？\n※削除した内容（カウント回数）は元に戻せません')
       if (!confirmResult) {
@@ -34,6 +48,10 @@ Vue.component('counter-box', {
     }
   },
   computed: {
+    /**
+     * コンテナ（ゲーム）のタイトルを入力するフィールドの長さを取得
+     * 文字が入力されるごとに動的にフィールド幅を大きくする
+     */
     getTitleAreaLength: function () {
       return this.gameTitleEdit.length + 2
     }
@@ -87,6 +105,10 @@ const kindOfGame = new Vue({
     ]
   },
   methods: {
+    /**
+     * 指定されたコンテナ（ゲーム）を表示する
+     * @param {number} index 表示したいコンテナの番号（IDではなく、配列のインデックス）
+     */
     selectGame: function (index) {
       for (let i = 0; i < this.games.length; i++) {
         this.games[i].selected = false
@@ -95,26 +117,46 @@ const kindOfGame = new Vue({
       this.refleshChart(this.games[index].counter)
       this.isShow = false
     },
+    /**
+     * サイドバーの選択中のコンテナ（ゲーム）だけ別の色にするために、selectedフラグを立てる
+     * @param {dict} game 選択中のゲーム
+     */
     classSelected: function (game) {
       return game.selected ? 'selected' : ''
     },
+    /**
+     * 既存のIDの中で最大値を返す
+     */
     getMaxId: function () {
       const maxId = this.games.reduce((pre, cur) => {
         return pre.id > cur.id ? pre : cur
       })
       return maxId.id
     },
+    /**
+     * 新規コンテナのIDを返す
+     */
     generateNewId: function () {
       return parseInt(this.getMaxId()) + 1
     },
+    /**
+     * 新規コンテナ（ゲーム）を作成する
+     */
     addGame: function () {
       this.games.push({ id: this.generateNewId(), name: 'New Game', selected: false, counter: { isEditing: true, buttons: [{ name: '', count: 0 }, { name: '', count: 0 }] } })
       this.selectGame(this.games.length - 1)
       this.refleshChart(this.games[this.games.length - 1].counter)
     },
+    /**
+     * ゲームを編集中にする、編集中であれば編集中から抜ける
+     */
     editGame: function () {
       this.isEditing = !this.isEditing
     },
+    /**
+     * コンテナ（ゲーム）を破棄する
+     * @param {number} index 破棄するコンテナの番号（IDではなく、配列のインデックス）
+     */
     trash: function (index) {
       removeGame(this.games[index].id)
       this.games.splice(index, 1)
@@ -122,6 +164,10 @@ const kindOfGame = new Vue({
         this.games.push(templateGame)
       }
     },
+    /**
+     * グラフを再描画
+     * @param {dict} counter カウンター = {buttons: [{name, count} {} {}]}
+     */
     refleshChart: function (counter) {
       chart.data.labels = []
       chart.data.datasets[0].data = []
@@ -166,6 +212,11 @@ const kindOfGame = new Vue({
   },
   watch: {
     games: {
+      /**
+       * Vue上のコンテナ情報が変更されるたびに変更内容をLocalStorageに保存
+       * @param {dict} val 現在のkindOfGame.gamesの値
+       * @param {dict} oldVal 1つ前のkindOfGame.gamesの値
+       */
       handler: function (val, oldVal) {
         for(let i = 0; i < val.length; i ++){
           saveStorage(val[i])
